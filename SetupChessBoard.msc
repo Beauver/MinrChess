@@ -1,0 +1,77 @@
+# Has the coordinates for the chess board
+@using beauver_chess_global
+
+@player Resetting chess board...
+
+# Clear all the pieces from the board
+@bypass /fill {{boardBottomLeft.getX()}} {{boardBottomLeft.getY()}} {{boardBottomLeft.getZ()}} {{boardTopRight.getX()}} {{boardTopRight.getY()}} {{boardTopRight.getZ()}} air
+
+@define Int setblockZDirection = 1
+@define Int setblockXDirection = 1
+@define Int whitePieceRotation = 8
+@define Int blackPieceRotation = 0
+
+@if (boardFacingDirection == "North") 
+    @var setblockZDirection = -1
+    @var whitePieceRotation = 8
+    @var blackPieceRotation = 0
+@elseif (boardFacingDirection == "South")
+    @var setblockZDirection = 1
+    @var whitePieceRotation = 0
+    @var blackPieceRotation = 8
+@elseif (boardFacingDirection == "East") 
+    @var setblockXDirection = -1
+    @var whitePieceRotation = 4
+    @var blackPieceRotation = 12
+@elseif (boardFacingDirection == "West")
+    @var setblockXDirection = 1
+    @var whitePieceRotation = 12
+    @var blackPieceRotation = 4
+@fi
+
+# Get the coordinates for the white pieces. -> White pieces are always on the bottom of the board.
+@define BlockLocation whiteLeftRookLocation = BlockLocation(boardBottomLeft.getX(), boardBottomLeft.getY(), boardBottomLeft.getZ(), "theta")
+@define BlockLocation whiteLeftKnightLocation = BlockLocation(boardBottomLeft.getX() + (1 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ(), "theta")
+@define BlockLocation whiteLeftBishopLocation = BlockLocation(boardBottomLeft.getX() + (2 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ(), "theta")
+@define BlockLocation whiteQueenLocation = BlockLocation(boardBottomLeft.getX() + (3 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ(), "theta")
+@define BlockLocation whiteKingLocation = BlockLocation(boardBottomLeft.getX() + (4 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ(), "theta")
+@define BlockLocation whiteRightBishopLocation = BlockLocation(boardBottomLeft.getX() + (5 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ(), "theta")
+@define BlockLocation whiteRightKnightLocation = BlockLocation(boardBottomLeft.getX() + (6 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ(), "theta")
+@define BlockLocation whiteRightRookLocation = BlockLocation(boardBottomLeft.getX() + (7 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ(), "theta")
+@define BlockLocation whitePawnRowStartLocation = BlockLocation(boardBottomLeft.getX(), boardBottomLeft.getY(), boardBottomLeft.getZ() + (1 * setblockZDirection), "theta")
+@define BlockLocation whitePawnRowEndLocation = BlockLocation(boardBottomLeft.getX() + (7 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ() + (1 * setblockZDirection), "theta")
+
+# Get the coordinates for the black pieces. -> Black pieces are always on the top of the board.
+@define BlockLocation blackLeftRookLocation = BlockLocation(boardBottomLeft.getX(), boardBottomLeft.getY(), boardBottomLeft.getZ() + (7 * setblockZDirection), "theta")
+@define BlockLocation blackLeftKnightLocation = BlockLocation(boardBottomLeft.getX() + (1 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ() + (7 * setblockZDirection), "theta")
+@define BlockLocation blackLeftBishopLocation = BlockLocation(boardBottomLeft.getX() + (2 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ() + (7 * setblockZDirection), "theta")
+@define BlockLocation blackQueenLocation = BlockLocation(boardBottomLeft.getX() + (3 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ() + (7 * setblockZDirection), "theta")
+@define BlockLocation blackKingLocation = BlockLocation(boardBottomLeft.getX() + (4 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ() + (7 * setblockZDirection), "theta")
+@define BlockLocation blackRightBishopLocation = BlockLocation(boardBottomLeft.getX() + (5 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ() + (7 * setblockZDirection), "theta")
+@define BlockLocation blackRightKnightLocation = BlockLocation(boardBottomLeft.getX() + (6 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ() + (7 * setblockZDirection), "theta")
+@define BlockLocation blackRightRookLocation = BlockLocation(boardBottomLeft.getX() + (7 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ() + (7 * setblockZDirection), "theta")
+@define BlockLocation blackPawnRowStartLocation = BlockLocation(boardBottomLeft.getX(), boardBottomLeft.getY(), boardBottomLeft.getZ() + (6 * setblockZDirection), "theta")
+@define BlockLocation blackPawnRowEndLocation = BlockLocation(boardBottomLeft.getX() + (7 * setblockXDirection), boardBottomLeft.getY(), boardBottomLeft.getZ() + (6 * setblockZDirection), "theta")
+
+
+# Place the white pieces on the board
+@bypass fill {{whitePawnRowStartLocation.getX()}} {{whitePawnRowStartLocation.getY()}} {{whitePawnRowStartLocation.getZ()}} {{whitePawnRowEndLocation.getX()}} {{whitePawnRowEndLocation.getY()}} {{whitePawnRowEndLocation.getZ()}} minecraft:player_head[rotation={{whitePieceRotation}}]{custom_name:'white_pawn',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::whitePawnTexture}}'}]},components:{"minecraft:custom_data":{piece:"pawn",color:"white"}}}
+@bypass setblock {{whiteLeftRookLocation.getX()}} {{whiteLeftRookLocation.getY()}} {{whiteLeftRookLocation.getZ()}} minecraft:player_head[rotation={{whitePieceRotation}}]{custom_name:'white_rook',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::whiteRookTexture}}'}]},components:{"minecraft:custom_data":{piece:"rook",color:"white"}}}
+@bypass setblock {{whiteLeftKnightLocation.getX()}} {{whiteLeftKnightLocation.getY()}} {{whiteLeftKnightLocation.getZ()}} minecraft:player_head[rotation={{whitePieceRotation}}]{custom_name:'white_knight',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::whiteKnightTexture}}'}]},components:{"minecraft:custom_data":{piece:"knight",color:"white"}}}
+@bypass setblock {{whiteLeftBishopLocation.getX()}} {{whiteLeftBishopLocation.getY()}} {{whiteLeftBishopLocation.getZ()}} minecraft:player_head[rotation={{whitePieceRotation}}]{custom_name:'white_bishop',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::whiteBishopTexture}}'}]},components:{"minecraft:custom_data":{piece:"bishop",color:"white"}}}
+@bypass setblock {{whiteQueenLocation.getX()}} {{whiteQueenLocation.getY()}} {{whiteQueenLocation.getZ()}} minecraft:player_head[rotation={{whitePieceRotation}}]{custom_name:'white_queen',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::whiteQueenTexture}}'}]},components:{"minecraft:custom_data":{piece:"queen",color:"white"}}}
+@bypass setblock {{whiteKingLocation.getX()}} {{whiteKingLocation.getY()}} {{whiteKingLocation.getZ()}} minecraft:player_head[rotation={{whitePieceRotation}}]{custom_name:'white_king',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::whiteKingTexture}}'}]},components:{"minecraft:custom_data":{piece:"king",color:"white"}}}
+@bypass setblock {{whiteRightBishopLocation.getX()}} {{whiteRightBishopLocation.getY()}} {{whiteRightBishopLocation.getZ()}} minecraft:player_head[rotation={{whitePieceRotation}}]{custom_name:'white_bishop',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::whiteBishopTexture}}'}]},components:{"minecraft:custom_data":{piece:"bishop",color:"white"}}}
+@bypass setblock {{whiteRightKnightLocation.getX()}} {{whiteRightKnightLocation.getY()}} {{whiteRightKnightLocation.getZ()}} minecraft:player_head[rotation={{whitePieceRotation}}]{custom_name:'white_knight',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::whiteKnightTexture}}'}]},components:{"minecraft:custom_data":{piece:"knight",color:"white"}}}
+@bypass setblock {{whiteRightRookLocation.getX()}} {{whiteRightRookLocation.getY()}} {{whiteRightRookLocation.getZ()}} minecraft:player_head[rotation={{whitePieceRotation}}]{custom_name:'white_rook',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::whiteRookTexture}}'}]},components:{"minecraft:custom_data":{piece:"rook",color:"white"}}}
+
+# Place the black pieces on the board
+@bypass fill {{blackPawnRowStartLocation.getX()}} {{blackPawnRowStartLocation.getY()}} {{blackPawnRowStartLocation.getZ()}} {{blackPawnRowEndLocation.getX()}} {{blackPawnRowEndLocation.getY()}} {{blackPawnRowEndLocation.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_pawn',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::blackPawnTexture}}'}]},components:{"minecraft:custom_data":{piece:"pawn",color:"black"}}}
+@bypass setblock {{blackLeftRookLocation.getX()}} {{blackLeftRookLocation.getY()}} {{blackLeftRookLocation.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_rook',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::blackRookTexture}}'}]},components:{"minecraft:custom_data":{piece:"rook",color:"black"}}}
+@bypass setblock {{blackLeftKnightLocation.getX()}} {{blackLeftKnightLocation.getY()}} {{blackLeftKnightLocation.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_knight',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::blackKnightTexture}}'}]},components:{"minecraft:custom_data":{piece:"knight",color:"black"}}}
+@bypass setblock {{blackLeftBishopLocation.getX()}} {{blackLeftBishopLocation.getY()}} {{blackLeftBishopLocation.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_bishop',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::blackBishopTexture}}'}]},components:{"minecraft:custom_data":{piece:"bishop",color:"black"}}}
+@bypass setblock {{blackQueenLocation.getX()}} {{blackQueenLocation.getY()}} {{blackQueenLocation.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_queen',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::blackQueenTexture}}'}]},components:{"minecraft:custom_data":{piece:"queen",color:"black"}}}
+@bypass setblock {{blackKingLocation.getX()}} {{blackKingLocation.getY()}} {{blackKingLocation.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_king',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::blackKingTexture}}'}]},components:{"minecraft:custom_data":{piece:"king",color:"black"}}}
+@bypass setblock {{blackRightBishopLocation.getX()}} {{blackRightBishopLocation.getY()}} {{blackRightBishopLocation.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_bishop',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::blackBishopTexture}}'}]},components:{"minecraft:custom_data":{piece:"bishop",color:"black"}}}
+@bypass setblock {{blackRightKnightLocation.getX()}} {{blackRightKnightLocation.getY()}} {{blackRightKnightLocation.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_knight',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::blackKnightTexture}}'}]},components:{"minecraft:custom_data":{piece:"knight",color:"black"}}}
+@bypass setblock {{blackRightRookLocation.getX()}} {{blackRightRookLocation.getY()}} {{blackRightRookLocation.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_rook',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::blackRookTexture}}'}]},components:{"minecraft:custom_data":{piece:"rook",color:"black"}}}
