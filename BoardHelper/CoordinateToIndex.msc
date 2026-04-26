@@ -1,0 +1,9 @@
+# This is a coordinate to index conversion function. This method has 2 variables:
+# - Int x: The x coordinate.
+# - Int y: The y coordinate.
+# Returns an Int index that corresponds to the x,y coordinates on the board.
+
+@define Int index = 0
+
+@var index = x + (y * 8)
+@return index

@@ -5,3 +5,6 @@
 
 @using beauver_chess_global
 
+# cast x,y to a single array index
+@define Int index = minecraftCoordinateToIndex(block.getX(), block.getZ())
+@player {{index}}

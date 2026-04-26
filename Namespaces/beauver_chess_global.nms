@@ -1,6 +1,8 @@
 @namespace beauver_chess_global
     ChessPiece makePiece(String piece, String color)
     Void resetBoardArray() 
+    Int coordinateToIndex(Int x, Int y)
+    Int minecraftCoordinateToIndex(Int x, Int z)
 
     BlockLocation boardTopLeft
     BlockLocation boardTopRight

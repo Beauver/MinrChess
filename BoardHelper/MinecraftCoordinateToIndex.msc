@@ -1,0 +1,29 @@
+# This is a coordinate to index conversion function. This method has 2 variables:
+# - Int x: The x minecraft coordinate
+# - Int z: The z minecraft coordinate 
+# Returns an Int index that corresponds to the x,z coordinates on the board.
+@using beauver_chess_global
+
+@define Int setblockXDirection = 1
+@define Int setblockZDirection = 1
+
+# Board orientation logic
+@if (boardFacingDirection == "North") 
+    @var setblockZDirection = -1
+@elseif (boardFacingDirection == "South")
+    @var setblockZDirection = 1
+@elseif (boardFacingDirection == "East") 
+    @var setblockXDirection = -1
+@elseif (boardFacingDirection == "West")
+    @var setblockXDirection = 1
+@fi
+
+# Convert world → board space
+@define Int relX = x - boardBottomLeft.getX()
+@define Int relZ = z - boardBottomLeft.getZ()
+
+@define Int arrayX = relX * setblockXDirection
+@define Int arrayZ = relZ * setblockZDirection
+
+# Convert to index
+@return arrayX + (arrayZ * 8)
