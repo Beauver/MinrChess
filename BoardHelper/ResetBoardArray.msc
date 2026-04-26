@@ -1,4 +1,4 @@
-# This script can is used as a void method.
+# This script is used as a void method.
 
 @using beauver_chess_global
 
@@ -38,3 +38,7 @@
 @var board.append(makePiece("bishop","black"))
 @var board.append(makePiece("knight","black"))
 @var board.append(makePiece("rook","black"))
+
+@var turn = "white"
+@var firstClick = true
+@var indexFirstClick = 0

@@ -3,6 +3,7 @@
     Void resetBoardArray() 
     Int coordinateToIndex(Int x, Int y)
     Int minecraftCoordinateToIndex(Int x, Int z)
+    String pieceToHeadString(ChessPiece piece)
 
     BlockLocation boardTopLeft
     BlockLocation boardTopRight
@@ -10,6 +11,11 @@
     BlockLocation boardBottomRight
 
     ChessPiece[] board
+    String turn
+    Boolean firstClick
+    Int indexFirstClick
+    ChessPiece selectedPiece
+    Block selectedBlock
 
     @class ChessPiece
        String piece

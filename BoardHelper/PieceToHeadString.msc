@@ -1,0 +1,32 @@
+# This is a method that converts a chess piece to a string that can be used in the head of the piece. This method has 1 variable:
+# - ChessPiece piece: The chess piece to convert to a string.
+# Returns a String that corresponds to the chess piece type and color.
+
+@using beauver_chess_global
+
+@if (piece.piece == "pawn" && piece.color == "white")
+    @return beauver_chess_chesspieces::whitePawnTexture
+@elseif (piece.piece == "rook" && piece.color == "white")
+    @return beauver_chess_chesspieces::whiteRookTexture
+@elseif (piece.piece == "knight" && piece.color == "white")
+    @return beauver_chess_chesspieces::whiteKnightTexture
+@elseif (piece.piece == "bishop" && piece.color == "white")
+    @return beauver_chess_chesspieces::whiteBishopTexture
+@elseif (piece.piece == "queen" && piece.color == "white")
+    @return beauver_chess_chesspieces::whiteQueenTexture
+@elseif (piece.piece == "king" && piece.color == "white")
+    @return beauver_chess_chesspieces::whiteKingTexture
+
+@elseif (piece.piece == "pawn" && piece.color == "black")
+    @return beauver_chess_chesspieces::blackPawnTexture
+@elseif (piece.piece == "rook" && piece.color == "black")
+    @return beauver_chess_chesspieces::blackRookTexture
+@elseif (piece.piece == "knight" && piece.color == "black")
+    @return beauver_chess_chesspieces::blackKnightTexture
+@elseif (piece.piece == "bishop" && piece.color == "black")
+    @return beauver_chess_chesspieces::blackBishopTexture
+@elseif (piece.piece == "queen" && piece.color == "black")
+    @return beauver_chess_chesspieces::blackQueenTexture
+@elseif (piece.piece == "king" && piece.color == "black")    
+    @return beauver_chess_chesspieces::blackKingTexture
+@fi

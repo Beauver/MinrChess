@@ -5,6 +5,74 @@
 
 @using beauver_chess_global
 
+@define Int whitePieceRotation = 8
+@define Int blackPieceRotation = 0
+
 # cast x,y to a single array index
 @define Int index = minecraftCoordinateToIndex(block.getX(), block.getZ())
-@player {{index}}
+
+@if (firstClick)
+
+    @if (board[index] == null)
+        @player &cYou must select a piece to move first!
+        @return
+    @fi
+
+    @define ChessPiece clickedPiece = board[index]
+
+    # Check if color of piece being moved matches the current turn
+    @if (clickedPiece.color != turn)
+        @player &cIt's currently &4{{turn}}'s &cturn, you can't move that piece yet!
+        @return
+    @fi
+
+    @bypass fill {{boardBottomLeft.getX()}} {{boardBottomLeft.getY()}} {{boardBottomLeft.getZ()}} {{boardTopRight.getX()}} {{boardTopRight.getY()}} {{boardTopRight.getZ()}} minecraft:lime_stained_glass replace air
+
+    @var selectedPiece = board[index]
+    @var selectedBlock = block
+    @var indexFirstClick = index
+    @var firstClick = false
+    @return
+@fi
+
+# move piece - board array
+@var board[index] = board[indexFirstClick]
+@var board[indexFirstClick] = null
+
+# move piece - world
+@if (boardFacingDirection == "North") 
+    @var whitePieceRotation = 8
+    @var blackPieceRotation = 0
+@elseif (boardFacingDirection == "South")
+    @var whitePieceRotation = 0
+    @var blackPieceRotation = 8
+@elseif (boardFacingDirection == "East") 
+    @var whitePieceRotation = 4
+    @var blackPieceRotation = 12
+@elseif (boardFacingDirection == "West")
+    @var whitePieceRotation = 12
+    @var blackPieceRotation = 4
+@fi
+
+# move piece - world
+@bypass fill {{boardBottomLeft.getX()}} {{boardBottomLeft.getY()}} {{boardBottomLeft.getZ()}} {{boardTopRight.getX()}} {{boardTopRight.getY()}} {{boardTopRight.getZ()}} air replace minecraft:lime_stained_glass
+@bypass setblock {{selectedBlock.getX()}} {{selectedBlock.getY()}} {{selectedBlock.getZ()}} air
+
+@if (turn == "white")
+    @bypass setblock {{block.getX()}} {{block.getY()}} {{block.getZ()}} minecraft:player_head[rotation={{whitePieceRotation}}]{custom_name:'white_{{selectedPiece.piece}}',profile:{properties:[{name:"textures",value:'{{pieceToHeadString(selectedPiece)}}'}]},components:{"minecraft:custom_data":{piece:"{{selectedPiece.piece}}",color:"white"}}}
+@else
+    @bypass setblock {{block.getX()}} {{block.getY()}} {{block.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_{{selectedPiece.piece}}',profile:{properties:[{name:"textures",value:'{{pieceToHeadString(selectedPiece)}}'}]},components:{"minecraft:custom_data":{piece:"{{selectedPiece.piece}}",color:"black"}}}
+@fi
+
+
+# change turn & reset variables
+@var firstClick = true
+@var indexFirstClick = 0
+@var selectedPiece = null
+@var selectedBlock = null
+
+@if (turn == "white")
+    @var turn = "black"
+@else
+    @var turn = "white"
+@fi
