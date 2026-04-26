@@ -1,0 +1,11 @@
+# This is a helper constructor function. This method has 2 variables:
+# - String p: The piece name.
+# - String c: The piece color.
+# It returns a ChessPiece object with the specified type and color.
+
+@using beauver_chess_global
+
+@define ChessPiece p = ChessPiece()
+@var p.piece = type
+@var p.color = color
+@return p

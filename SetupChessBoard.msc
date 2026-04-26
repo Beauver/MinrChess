@@ -75,3 +75,5 @@
 @bypass setblock {{blackRightBishopLocation.getX()}} {{blackRightBishopLocation.getY()}} {{blackRightBishopLocation.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_bishop',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::blackBishopTexture}}'}]},components:{"minecraft:custom_data":{piece:"bishop",color:"black"}}}
 @bypass setblock {{blackRightKnightLocation.getX()}} {{blackRightKnightLocation.getY()}} {{blackRightKnightLocation.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_knight',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::blackKnightTexture}}'}]},components:{"minecraft:custom_data":{piece:"knight",color:"black"}}}
 @bypass setblock {{blackRightRookLocation.getX()}} {{blackRightRookLocation.getY()}} {{blackRightRookLocation.getZ()}} minecraft:player_head[rotation={{blackPieceRotation}}]{custom_name:'black_rook',profile:{properties:[{name:"textures",value:'{{beauver_chess_chesspieces::blackRookTexture}}'}]},components:{"minecraft:custom_data":{piece:"rook",color:"black"}}}
+
+@var resetBoardArray()

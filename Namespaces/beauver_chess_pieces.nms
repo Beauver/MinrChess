@@ -1,0 +1,16 @@
+@namespace beauver_chess_chesspieces
+    String whitePawnTexture  
+    String whiteRookTexture  
+    String whiteKnightTexture  
+    String whiteBishopTexture  
+    String whiteKingTexture  
+    String whiteQueenTexture
+    
+    String blackPawnTexture  
+    String blackRookTexture  
+    String blackKnightTexture  
+    String blackBishopTexture
+    String blackKingTexture
+    String blackQueenTexture
+
+@endnamespace

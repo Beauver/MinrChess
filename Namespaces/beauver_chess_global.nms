@@ -1,0 +1,17 @@
+@namespace beauver_chess_global
+    ChessPiece makePiece(String piece, String color)
+    Void resetBoardArray() 
+
+    BlockLocation boardTopLeft
+    BlockLocation boardTopRight
+    BlockLocation boardBottomLeft
+    BlockLocation boardBottomRight
+
+    ChessPiece[] board
+
+    @class ChessPiece
+       String piece
+       String color
+    @endclass
+
+@endnamespace

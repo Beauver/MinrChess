@@ -1,0 +1,40 @@
+# This script can is used as a void method.
+
+@using beauver_chess_global
+
+@var board = ChessPiece[]
+
+# Back Rank White
+@var board.append(makePiece("rook","white"))
+@var board.append(makePiece("knight","white"))
+@var board.append(makePiece("bishop","white"))
+@var board.append(makePiece("queen","white"))
+@var board.append(makePiece("king","white"))
+@var board.append(makePiece("bishop","white"))
+@var board.append(makePiece("knight","white"))
+@var board.append(makePiece("rook","white"))
+
+# Pawn Rank White
+@for Int i in list::range(0,8)
+    @var board.append(makePiece("pawn","white"))
+@done
+
+# Empty Squares middle
+@for Int i in list::range(0,32)
+    @var board.append(null)
+@done
+
+# Pawn Rank Black
+@for Int i in list::range(0,8)
+    @var board.append(makePiece("pawn","black"))
+@done
+
+# Back Rank Black
+@var board.append(makePiece("rook","black"))
+@var board.append(makePiece("knight","black"))
+@var board.append(makePiece("bishop","black"))
+@var board.append(makePiece("queen","black"))
+@var board.append(makePiece("king","black"))
+@var board.append(makePiece("bishop","black"))
+@var board.append(makePiece("knight","black"))
+@var board.append(makePiece("rook","black"))

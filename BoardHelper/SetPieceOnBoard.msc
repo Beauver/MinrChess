@@ -1,0 +1,7 @@
+# This is a set piece function. This method has 3 variables:
+# - ChessPiece piece: The chess piece to place on the board.
+# - Int x: The x coordinate to place the piece at.
+# - Int y: The y coordinate to place the piece at.
+
+@using beauver_chess_global
+
